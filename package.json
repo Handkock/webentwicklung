@@ -1,0 +1,24 @@
+{
+  "name": "webentwicklung",
+  "version": "1.0.0",
+  "description": "Web-Anwendung zur Planung von amateurastronomischen Beobachtungssitzungen.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node backend/main 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Handkock/webentwicklung.git"
+  },
+  "author": "Vladislav Paskar, Albert Stefan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Handkock/webentwicklung/issues"
+  },
+  "homepage": "https://github.com/Handkock/webentwicklung#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "less": "^3.0.4",
+    "nodemon": "^1.17.4"
+  }
+}
