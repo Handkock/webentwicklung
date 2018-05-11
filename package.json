@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/Handkock/webentwicklung#readme",
   "dependencies": {
+    "eslint": "^4.19.1",
     "express": "^4.16.3",
     "less": "^3.0.4",
+    "lint": "^1.1.2",
     "nodemon": "^1.17.4"
   }
 }
