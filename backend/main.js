@@ -9,7 +9,6 @@ app.use(express.static(path.join(__dirname, "../frontend/views")));
 app.get("/", function (req, res) {
 	res.send("edit.html");
 });
-
 const port = process.argv[2];
 
 //start server
