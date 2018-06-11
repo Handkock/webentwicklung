@@ -4,7 +4,7 @@
   "description": "Web-Anwendung zur Planung von amateurastronomischen Beobachtungssitzungen.",
   "main": "main.js",
   "scripts": {
-    "start": "node backend/main 8080",
+    "start": "nodemon backend/main 8080",
     "clean": "rm -rf frontend/dist/styles/*  && rm -rf frontend/dist/js/*",
     "less": "node_modules/.bin/lessc frontend/styles/styles.less > frontend/dist/styles/styles.css",
     "browserify": "node_modules/.bin/browserify frontend/js/main.js -o frontend/dist/js/main.js",
@@ -35,6 +35,7 @@
     "less": "^3.0.4",
     "less-plugin-clean-css": "^1.5.1",
     "lint": "^1.1.2",
+    "mongodb": "^3.0.10",
     "nodemon": "^1.17.4"
   }
 }
