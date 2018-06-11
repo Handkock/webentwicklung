@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node backend/main 8080",
     "clean": "rm -rf frontend/dist/styles/*  && rm -rf frontend/dist/js/*",
-    "less": "node_modules/.bin/lessc frontend/styles/styles.less > frontend/dist/styles.css",
+    "less": "node_modules/.bin/lessc frontend/styles/styles.less > frontend/dist/styles/styles.css",
     "browserify": "node_modules/.bin/browserify frontend/js/main.js -o frontend/dist/js/main.js",
     "minify": "node_modules/.bin/minify frontend/dist/js/main.js --out-file frontend/dist/js/main.js && npm run less_minify",
     "less_minify": "node_modules/.bin/lessc --clean-css frontend/styles/styles.less  ./frontend/dist/styles/styles.css",
