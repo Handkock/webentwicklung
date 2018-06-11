@@ -3,11 +3,11 @@ var app = express();
 const path = require("path");
 
 //load view engine
-app.use(express.static(path.join(__dirname, "../frontend/views")));
+app.use(express.static(path.join(__dirname, "..")));
 // app.engine("html", engines.mustache);
 
 app.get("/", function (req, res) {
-	res.send("edit.html");
+	res.send("index.html");
 });
 const port = process.argv[2];
 
