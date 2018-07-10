@@ -7,7 +7,7 @@ let sessionSchema = new mongoose.Schema({
 		type: Number,
 		required: true
 	},
-	longtitude: {
+	longitude: {
 		type: Number,
 		required: true
 	},
