@@ -100,11 +100,11 @@ html(lang='de')
                     .form-group
                         label Latitude 
                         br
-                        input.form-control(name="latitude" type='number', step='0.01', value=session.latitude, min="0" required)
+                        input.form-control(name="latitude" type='number', step='0.01', value=session.latitude, required)
                     .form-group
                         label Longitude
                         br
-                        input.form-control(name="longitude" type='Number', step='0.01', value=session.longitude, min="0" required)
+                        input.form-control(name="longitude" type='Number', step='0.01', value=session.longitude, required)
                     .form-group
                         label Beobachtungsobjekte
                         br
@@ -114,6 +114,17 @@ html(lang='de')
                         input.form-control(name="date" type="date", value=date required)
                     button.btn.btn-primary(type='submit') Sitzung speichern
         if viewSession
+            script.
+                function openWin()
+                {
+                    var myWindow = window.open('','', 'width=200,height=100');
+                    myWindow.document.write("Hallo");
+                    myWindow.document.close();
+                
+                myWindow.focus();
+                myWindow.print();
+                myWindow.close();
+                }
             h2.text-center Sitzung
             br
             .new.col-md-offset-3.col-md-6.col-xs-12  
@@ -131,5 +142,8 @@ html(lang='de')
                         tr
                         th(scope='row') Beobachtungsobjekte
                         td #{session.objects}
+            br
+            .new.col-md-offset-3.col-md-6.col-xs-12 
+                button(class='button' name="print" onclick="openWin()") Drucken
   script.
     console.log(sessions);
