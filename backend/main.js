@@ -46,6 +46,17 @@ app.get("/", function (req, res) {
 	});
 });
 
+app.get("/sessions", function (request, response) {
+	Session.find({}, function (err, sessions) {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			response.json(sessions);
+		}
+	});
+});
+
 app.get("/newSession", function (req, res) {
 	res.render("main", {
 		newSession: true

@@ -45,7 +45,7 @@ html(lang='de')
             h2.text-center Sitzungsliste
             br
             table.table.list
-                thead
+                thead(id="head")
                     tr
                     th(scope='col') #
                     th(scope='col') Datum
@@ -54,8 +54,8 @@ html(lang='de')
                     th(scope='col') Beobachtungsobjekte
                     th(scope='col') Google Maps
                     th(scope='col') 
-                tbody
-                    each session, i in sessions
+                tbody(id='table')
+                    //-each session, i in sessions
                         tr(class="session-obj" data-id="session-"+session._id)
                             th(scope='row') #{i+1}
                             td #{session.date}
@@ -71,6 +71,10 @@ html(lang='de')
                                 span &nbsp;
                                 form.delete-form
                                     button.btn.btn-danger.delete-session(type="submit", data-id=session._id) L&ouml;schen
+            div(id="paging")
+                button.btn.btn-primary(type = "button", id="back") Zur&uuml;ck
+                text(id="page")
+                button.btn.btn-primary(type = "button", id="next") Weiter
         if newSession
             h2.text-center Neue Sitzung erstellen
             br
