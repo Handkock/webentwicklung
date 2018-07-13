@@ -65,8 +65,8 @@ app.get("/newSession", function (req, res) {
 
 app.post("/newSession", function (req, res) {
 	let session = new Session();
-	session.latitude = req.body.latitude;
-	session.longitude = req.body.longitude;
+	session.latitude = parseFloat(req.body.latitude);
+	session.longitude = parseFloat(req.body.longitude);
 	session.date = req.body.date;
 	session.objects = req.body.objects;
 	session.save(function (err) {
@@ -131,8 +131,8 @@ app.get("/editSession/:id", function (req, res) {
 app.post("/editSession/:id", function (req, res) {
 	Session.findById(req.params.id, function (err, session) {
 		console.log(req.params.id);
-		session.latitude = req.body.latitude;
-		session.longitude = req.body.longitude;
+		session.latitude = parseFloat(req.body.latitude);
+		session.longitude = parseFloat(req.body.longitude);
 		session.date = req.body.date;
 		session.objects = req.body.objects;
 		session.save(function (err) {

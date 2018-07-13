@@ -72,9 +72,9 @@ html(lang='de')
                                 form.delete-form
                                     button.btn.btn-danger.delete-session(type="submit", data-id=session._id) L&ouml;schen
             div(id="paging")
-                button.btn.btn-primary(type = "button", id="back") Zur&uuml;ck
+                button(type = "button", id="back") Zur&uuml;ck
                 text(id="page")
-                button.btn.btn-primary(type = "button", id="next") Weiter
+                button(type = "button", id="next") Weiter
         if newSession
             h2.text-center Neue Sitzung erstellen
             br
@@ -83,11 +83,11 @@ html(lang='de')
                     .form-group
                         label Latitude 
                         br
-                        input.form-control(name="latitude" type='number', step='0.01', placeholder='Enter latitude....', required)
+                        input.form-control(name="latitude" type='text', step='0.01', placeholder='Enter latitude....', required)
                     .form-group
                         label Longitude
                         br
-                        input.form-control(name="longitude" type='Number', step='0.01', placeholder='Enter longitude', required)
+                        input.form-control(name="longitude" type='text', step='0.01', placeholder='Enter longitude', required)
                     .form-group
                         label Beobachtungsobjekte
                         br
@@ -121,33 +121,31 @@ html(lang='de')
             script.
                 function openWin()
                 {
-                    var myWindow = window.open('','', 'width=200,height=100');
-                    myWindow.document.write("Hallo");
-                    myWindow.document.close();
-                
-                myWindow.focus();
-                myWindow.print();
-                myWindow.close();
+                    let b = document.getElementById("printButton");
+                    b.style.visibility = "hidden";
+                    window.print();
+                    b.style.visibility = "visible";
                 }
-            h2.text-center Sitzung
-            br
-            .new.col-md-offset-3.col-md-6.col-xs-12  
-                table.table.col-md-4
-                    tbody
-                        tr
-                        th(scope='row') Latitude
-                        td #{session.latitude}
-                        tr
-                        th(scope='row') Longitude
-                        td #{session.longitude}
-                        tr
-                        th(scope='row') Datum
-                        td #{date}
-                        tr
-                        th(scope='row') Beobachtungsobjekte
-                        td #{session.objects}
-            br
+            div(id="printArea")
+                h2.text-center Sitzung
+                br
+                .new.col-md-offset-3.col-md-6.col-xs-12  
+                    table.table.col-md-4
+                        tbody
+                            tr
+                            th(scope='row') Latitude
+                            td #{session.latitude}
+                            tr
+                            th(scope='row') Longitude
+                            td #{session.longitude}
+                            tr
+                            th(scope='row') Datum
+                            td #{date}
+                            tr
+                            th(scope='row') Beobachtungsobjekte
+                            td #{session.objects}
+                br
             .new.col-md-offset-3.col-md-6.col-xs-12 
-                button(class='button' name="print" onclick="openWin()") Drucken
+                button(class='button' id="printButton" name="print" onclick="openWin()") Drucken
   script.
     console.log(sessions);

@@ -76,7 +76,7 @@ function loadSessions() {
 }
 function paginate(resize = false) {
 	sessionCount = sessions.length;
-	if (resize) {
+	if (resize) { //falls Größen neu berechnet werden müssen
 		indexFirst = 0;
 		indexLast = 0;
 		fillTable([sessions[0]]);
@@ -123,8 +123,13 @@ function fillTable(sessions) {
 		let cellButtons = row.insertCell(6);
 		console.log(sessions);
 		console.log(sessionIndex + "index");
-		cellDate.innerHTML = sessions[sessionIndex].date.slice(0, 10);
-		cellId.innerHTML = sessionIndex + 1;
+		cellDate.innerHTML = convertTime(sessions[sessionIndex].date);
+		let idA = document.createElement("a");
+		let idText = document.createTextNode(sessionIndex + 1);
+		idA.href = "view/" + sessions[sessionIndex]._id;
+		idA.appendChild(idText);
+		cellId.appendChild(idA);
+		//cellId.innerHTML = sessionIndex + 1;
 		cellLatitude.innerHTML = sessions[sessionIndex].latitude;
 		cellLongitude.innerHTML = sessions[sessionIndex].longitude;
 		cellObjects.innerHTML = sessions[sessionIndex].objects;
@@ -155,4 +160,18 @@ function fillTable(sessions) {
 		form.appendChild(btnLöschen);
 		cellButtons.appendChild(form);
 	}
+}
+function convertTime(sessionDate) {
+	let date = new Date(sessionDate);
+	let month = "" + (date.getMonth() + 1);
+	let day = "" + date.getDate();
+	let year = date.getFullYear();
+	if (month.length < 2) {
+		month = "0" + month;
+	}
+	if (day.length < 2) {
+		day = "0" + day;
+	}
+	date = day + "." + month + "." + year;
+	return date;
 }
