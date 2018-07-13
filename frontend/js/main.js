@@ -48,7 +48,7 @@ window.onresize = function () {
 };
 function loadSessions() {
 	var request = new XMLHttpRequest();
-	request.open("GET", "/sessions", true);
+	request.open("GET", "/jsonSessions", true);
 	request.setRequestHeader("Content-Type", "application/json");
 	request.send();
 	request.onreadystatechange = function () {
@@ -106,11 +106,12 @@ function fillTable(sessions) {
 		let cellLongitude = row.insertCell(3);
 		let cellObjects = row.insertCell(4);
 		let cellMap = row.insertCell(5);
-		let cellButtons = row.insertCell(6);
+		let cellEdit = row.insertCell(6);
+		let cellDelete = row.insertCell(7);
 		cellDate.innerHTML = convertTime(sessions[sessionIndex].date);
 		let idA = document.createElement("a");
 		let idText = document.createTextNode(sessionIndex + 1);
-		idA.href = "view/" + sessions[sessionIndex]._id;
+		idA.href = "sessions/" + sessions[sessionIndex]._id;
 		idA.appendChild(idText);
 		cellId.appendChild(idA);
 		//cellId.innerHTML = sessionIndex + 1;
@@ -130,19 +131,19 @@ function fillTable(sessions) {
 		let aBearbeiten = document.createElement("a");
 		aBearbeiten.setAttribute("type", "button");
 		aBearbeiten.setAttribute("class", "btn btn-primary");
-		aBearbeiten.href = "editSession/" + sessions[sessionIndex]._id;
+		aBearbeiten.href = "edit/" + sessions[sessionIndex]._id;
 		aBearbeiten.innerHTML = "Bearbeiten";
-		cellButtons.appendChild(aBearbeiten);
+		cellEdit.appendChild(aBearbeiten);
 
 		let aDelete = document.createElement("button");
 		aDelete.setAttribute("class", "btn btn-danger");
 		aDelete.setAttribute("id", sessions[sessionIndex]._id);
 		aDelete.innerHTML = "L&ouml;schen";
-		cellButtons.appendChild(aDelete);
+		cellDelete.appendChild(aDelete);
 	}
 	$(".btn-danger").on("click", function () {
 		const id = $(this).attr("id");
-		let path = "/deleteSession/" + id;
+		let path = "/sessions/" + id;
 		$.ajax({
 			type: "DELETE",
 			url: path,

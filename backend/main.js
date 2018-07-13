@@ -39,6 +39,7 @@ app.get("/", function (req, res) {
 			console.log(err);
 		}
 		else {
+			res.header("Content-Type", "text/html");
 			res.render("main", {
 				sessions: sessions
 			});
@@ -46,24 +47,26 @@ app.get("/", function (req, res) {
 	});
 });
 
-app.get("/sessions", function (request, response) {
+app.get("/jsonSessions", function (req, res) {
+	res.header("Content-Type", "application/json");
 	Session.find({}, function (err, sessions) {
 		if (err) {
 			console.log(err);
 		}
 		else {
-			response.json(sessions);
+			res.json(sessions);
 		}
 	});
 });
 
-app.get("/newSession", function (req, res) {
+app.get("/new", function (req, res) {
+	res.header("Content-Type", "text/html");
 	res.render("main", {
 		newSession: true
 	});
 });
 
-app.post("/newSession", function (req, res) {
+app.post("/new", function (req, res) {
 	let session = new Session();
 	session.latitude = parseFloat(req.body.latitude).toFixed(10);
 	session.longitude = parseFloat(req.body.longitude).toFixed(10);
@@ -75,12 +78,13 @@ app.post("/newSession", function (req, res) {
 			return;
 		}
 		else {
+			res.header("Content-Type", "text/html");
 			res.redirect("/");
 		}
 	});
 });
 
-app.get("/view/:id", function (req, res) {
+app.get("/sessions/:id", function (req, res) {
 	Session.findById(req.params.id, function (err, session) {
 		var date = new Date(session.date);
 		let month = "" + (date.getMonth() + 1);
@@ -98,6 +102,7 @@ app.get("/view/:id", function (req, res) {
 			console.log(err);
 		}
 		else {
+			res.header("Content-Type", "text/html");
 			res.render("main", {
 				viewSession: true,
 				session: session,
@@ -107,7 +112,7 @@ app.get("/view/:id", function (req, res) {
 	});
 });
 
-app.get("/editSession/:id", function (req, res) {
+app.get("/edit/:id", function (req, res) {
 	Session.findById(req.params.id, function (err, session) {
 		var date = new Date(session.date);
 		let month = "" + (date.getMonth() + 1);
@@ -128,8 +133,9 @@ app.get("/editSession/:id", function (req, res) {
 	});
 });
 
-app.post("/editSession/:id", function (req, res) {
+app.post("/edit/:id", function (req, res) {
 	Session.findById(req.params.id, function (err, session) {
+		console.log(session);
 		session.latitude = parseFloat(req.body.latitude).toFixed(10);
 		session.longitude = parseFloat(req.body.longitude).toFixed(10);
 		session.date = req.body.date;
@@ -140,13 +146,14 @@ app.post("/editSession/:id", function (req, res) {
 				return;
 			}
 			else {
+				res.header("Content-Type", "text/html");
 				res.redirect("/");
 			}
 		});
 	});
 });
 
-app.delete("/deleteSession/:id", function (req, res) {
+app.delete("/sessions/:id", function (req, res) {
 	let query = { _id: req.params.id };
 
 	Session.findById(req.params._id, function () {
@@ -155,6 +162,7 @@ app.delete("/deleteSession/:id", function (req, res) {
 				console.log(err);
 			}
 			else {
+				res.header("Content-Type", "text/html");
 				res.redirect("/");
 			}
 		});
