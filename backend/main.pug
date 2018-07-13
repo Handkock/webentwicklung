@@ -50,8 +50,8 @@ html(lang='de')
                         tr
                         th(scope='col') #
                         th(scope='col') Datum
-                        th(scope='col') Latitude
-                        th(scope='col') Longtiude
+                        th(scope='col') Breitengrad
+                        th(scope='col') L&auml;ngengrad
                         th(scope='col') Beobachtungsobjekte
                         th(scope='col') Google Maps
                         th(scope='col') 
@@ -72,11 +72,11 @@ html(lang='de')
             .new.col-md-offset-3.col-md-6.col-xs-12              
                 form(method="post" action="/new")
                     .form-group
-                        label Latitude 
+                        label Breitengrad 
                         br
                         input.form-control(name="latitude" type='text', placeholder='Enter latitude....', required)
                     .form-group
-                        label Longitude
+                        label L&auml;ngengrad
                         br
                         input.form-control(name="longitude" type='text', placeholder='Enter longitude', required)
                     .form-group
@@ -93,11 +93,11 @@ html(lang='de')
             .new.col-md-offset-3.col-md-6.col-xs-12              
                 form(method="post" action="/edit/"+session._id )
                     .form-group
-                        label Latitude 
+                        label Breitengrad
                         br
                         input.form-control(name="latitude" type='text', value=session.latitude, required)
                     .form-group
-                        label Longitude
+                        label L&auml;ngengrad
                         br
                         input.form-control(name="longitude" type='text', value=session.longitude, required)
                     .form-group
@@ -124,10 +124,10 @@ html(lang='de')
                     table.table.col-md-4
                         tbody
                             tr
-                            th(scope='row') Latitude
+                            th(scope='row') Breitengrad
                             td #{session.latitude}
                             tr
-                            th(scope='row') Longitude
+                            th(scope='row') L&auml;ngengrad
                             td #{session.longitude}
                             tr
                             th(scope='row') Datum

@@ -19,7 +19,6 @@ $(document).ready(function () {
 });
 window.onload = function () {
 	table = document.getElementById("table");
-	console.log(table);
 	if (table !== null) {
 		sessionCount = 0;
 		sessions = [];
@@ -78,6 +77,9 @@ function paginate(resize = false) {
 		let headHeight = document.getElementById("head").clientHeight;
 		var tableheight = window.innerHeight - rect.top - pagingHeight - headHeight;
 		sessionsPerPage = Math.floor(tableheight / elementSize);
+		if (sessionsPerPage < 1) {
+			sessionsPerPage = 1;
+		}
 		pages = Math.ceil(sessionCount / sessionsPerPage);
 	}
 	if (currentPage > pages) {
