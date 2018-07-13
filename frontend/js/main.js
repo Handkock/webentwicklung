@@ -17,34 +17,38 @@ $(document).ready(function () {
 	});
 });
 window.onload = function () {
-	sessionCount = 0;
-	sessions = [];
-	pages = 1;
-	currentPage = 1;
-	indexFirst = 0;
-	indexLast = 0;
 	table = document.getElementById("table");
-	if ((document.getElementById("back") !== null) && (document.getElementById("next") !== null)) {
-		document.getElementById("back").onclick = function () {
-			if (currentPage > 1) {
-				currentPage--;
-				paginate();
-			}
-		};
-		document.getElementById("next").onclick = function () {
-			if (currentPage < pages) {
-				currentPage++;
-				paginate();
-			}
-		};
+	if (table !== null) {
+		sessionCount = 0;
+		sessions = [];
+		pages = 1;
+		currentPage = 1;
+		indexFirst = 0;
+		indexLast = 0;
+		if ((document.getElementById("back") !== null) && (document.getElementById("next") !== null)) {
+			document.getElementById("back").onclick = function () {
+				if (currentPage > 1) {
+					currentPage--;
+					paginate();
+				}
+			};
+			document.getElementById("next").onclick = function () {
+				if (currentPage < pages) {
+					currentPage++;
+					paginate();
+				}
+			};
+		}
+		loadSessions();
+		//leere table nehmen
+		//pagination machen
+		//table befüllen
 	}
-	loadSessions();
-	//leere table nehmen
-	//pagination machen
-	//table befüllen
 };
 window.onresize = function () {
-	paginate(true);
+	if (table !== null) {
+		paginate(true);
+	}
 };
 function loadSessions() {
 	var request = new XMLHttpRequest();

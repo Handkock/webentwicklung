@@ -59,9 +59,11 @@ html(lang='de')
                     tbody(id='table')
                     //-    table content                
                 div(id="paging")
-                    button(type = "button", id="back") Zur&uuml;ck
+                    button(type = "button", id="back" class="btn btn-light") Zur&uuml;ck
+                    span &nbsp;
                     text(id="page")
-                    button(type = "button", id="next") Weiter
+                    span &nbsp;
+                    button(type = "button", id="next" class="btn btn-light") Weiter
             else 
                 h2.text-center Keine Sitzungen gefunden
         if newSession
@@ -72,11 +74,11 @@ html(lang='de')
                     .form-group
                         label Latitude 
                         br
-                        input.form-control(name="latitude" type='text', step='0.01', placeholder='Enter latitude....', required)
+                        input.form-control(name="latitude" type='text', placeholder='Enter latitude....', required)
                     .form-group
                         label Longitude
                         br
-                        input.form-control(name="longitude" type='text', step='0.01', placeholder='Enter longitude', required)
+                        input.form-control(name="longitude" type='text', placeholder='Enter longitude', required)
                     .form-group
                         label Beobachtungsobjekte
                         br
@@ -93,11 +95,11 @@ html(lang='de')
                     .form-group
                         label Latitude 
                         br
-                        input.form-control(name="latitude" type='number', step='0.01', value=session.latitude, required)
+                        input.form-control(name="latitude" type='text', value=session.latitude, required)
                     .form-group
                         label Longitude
                         br
-                        input.form-control(name="longitude" type='Number', step='0.01', value=session.longitude, required)
+                        input.form-control(name="longitude" type='text', value=session.longitude, required)
                     .form-group
                         label Beobachtungsobjekte
                         br
