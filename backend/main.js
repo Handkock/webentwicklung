@@ -149,7 +149,7 @@ app.post("/editSession/:id", function (req, res) {
 app.delete("/deleteSession/:id", function (req, res) {
 	let query = { _id: req.params.id };
 
-	Session.findById(req.params._id, function (err, session) {
+	Session.findById(req.params._id, function () {
 		Session.remove(query, function (err) {
 			if (err) {
 				console.log(err);

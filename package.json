@@ -5,12 +5,12 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon backend/main 8080",
-    "clean": "rm -rf frontend/dist/styles/*  && rm -rf frontend/dist/js/*",
+    "clean": "rm -rf frontend/dist/styles/*  && rm -rf frontend/dist/js/* && rm -rf node_modules",
     "less": "node_modules/.bin/lessc frontend/styles/styles.less > frontend/dist/styles/styles.css",
     "browserify": "node_modules/.bin/browserify frontend/js/main.js -o frontend/dist/js/main.js",
     "minify": "node_modules/.bin/minify frontend/dist/js/main.js --out-file frontend/dist/js/main.js && npm run less_minify",
     "less_minify": "node_modules/.bin/lessc --clean-css frontend/styles/styles.less  ./frontend/dist/styles/styles.css",
-    "build": "npm run debug && npm run minify",
+    "build": "npm run debug && npm run minify && npm install",
     "debug": "npm run clean && npm run lint && npm run less && npm run browserify",
     "lint": "node_modules/.bin/eslint backend/main.js && npm run lint2",
     "lint2": "node_modules/.bin/eslint frontend/js/main.js"

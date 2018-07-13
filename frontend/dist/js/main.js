@@ -57,12 +57,6 @@ function loadSessions() {
 			sessions = JSON.parse(request.responseText);
 			if (sessions.length !== 0) {
 				paginate(true);
-				// document.getElementById("next").style.display = "block";
-				// document.getElementById("back").style.display = "block";
-			}
-			else {
-				// document.getElementById("next").style.display = "none";
-				// document.getElementById("back").style.display = "none";
 			}
 		}
 	};
