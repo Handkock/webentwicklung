@@ -130,7 +130,6 @@ app.get("/editSession/:id", function (req, res) {
 
 app.post("/editSession/:id", function (req, res) {
 	Session.findById(req.params.id, function (err, session) {
-		console.log(req.params.id);
 		session.latitude = parseFloat(req.body.latitude);
 		session.longitude = parseFloat(req.body.longitude);
 		session.date = req.body.date;
@@ -148,7 +147,7 @@ app.post("/editSession/:id", function (req, res) {
 });
 
 app.delete("/deleteSession/:id", function (req, res) {
-	let query = { id: req.params._id };
+	let query = { _id: req.params.id };
 
 	Session.findById(req.params._id, function (err, session) {
 		Session.remove(query, function (err) {

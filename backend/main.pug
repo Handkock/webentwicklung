@@ -42,39 +42,43 @@ html(lang='de')
       .new
       p #{page}
         if sessions
-            h2.text-center Sitzungsliste
-            br
-            table.table.list
-                thead(id="head")
-                    tr
-                    th(scope='col') #
-                    th(scope='col') Datum
-                    th(scope='col') Latitude
-                    th(scope='col') Longtiude
-                    th(scope='col') Beobachtungsobjekte
-                    th(scope='col') Google Maps
-                    th(scope='col') 
-                tbody(id='table')
-                    //-each session, i in sessions
-                        tr(class="session-obj" data-id="session-"+session._id)
-                            th(scope='row') #{i+1}
-                            td #{session.date}
-                            td #{session.latitude}
-                            td #{session.longitude}
-                            td #{session.objects}
-                            td
-                                a(href="https://www.google.com/maps/?q="+session.latitude+","+session.longitude target="_blank") In Google Maps anzeigen
-                                    
-                            td                           
-                                a(href="editSession/"+session._id)
-                                    button.btn.btn-primary(type='button') Bearbeiten
-                                span &nbsp;
-                                form.delete-form
-                                    button.btn.btn-danger.delete-session(type="submit", data-id=session._id) L&ouml;schen
-            div(id="paging")
-                button(type = "button", id="back") Zur&uuml;ck
-                text(id="page")
-                button(type = "button", id="next") Weiter
+            if (sessions.length > 0)
+                h2.text-center Sitzungsliste
+                br
+                table.table.list
+                    thead(id="head")
+                        tr
+                        th(scope='col') #
+                        th(scope='col') Datum
+                        th(scope='col') Latitude
+                        th(scope='col') Longtiude
+                        th(scope='col') Beobachtungsobjekte
+                        th(scope='col') Google Maps
+                        th(scope='col') 
+                    tbody(id='table')
+                        //-each session, i in sessions
+                            tr(class="session-obj" data-id="session-"+session._id)
+                                th(scope='row') #{i+1}
+                                td #{session.date}
+                                td #{session.latitude}
+                                td #{session.longitude}
+                                td #{session.objects}
+                                td
+                                    a(href="https://www.google.com/maps/?q="+session.latitude+","+session.longitude target="_blank") In Google Maps anzeigen
+                                        
+                                td                           
+                                    a(href="editSession/"+session._id)
+                                        button.btn.btn-primary(type='button') Bearbeiten
+                                    span &nbsp;
+                                    form.delete-form
+                                        button.btn.btn-danger.delete-session(type="submit", data-id=session._id) L&ouml;schen
+                
+                div(id="paging")
+                    button(type = "button", id="back") Zur&uuml;ck
+                    text(id="page")
+                    button(type = "button", id="next") Weiter
+            else 
+                h2.text-center Keine Sitzungen gefunden
         if newSession
             h2.text-center Neue Sitzung erstellen
             br
@@ -148,4 +152,3 @@ html(lang='de')
             .new.col-md-offset-3.col-md-6.col-xs-12 
                 button(class='button' id="printButton" name="print" onclick="openWin()") Drucken
   script.
-    console.log(sessions);

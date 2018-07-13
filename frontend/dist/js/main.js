@@ -10,20 +10,6 @@ var indexFirst;
 var indexLast;
 var pagingHeight;
 $(document).ready(function () {
-	$(".delete-form").submit(function () {
-		const id = $(".delete-session").attr("data-id");
-		$.ajax({
-			type: "DELETE",
-			url: "/deleteSession/" + id,
-			success: function () {
-				return false;
-			},
-			error: function (err) {
-				console.error(err);
-			}
-		});
-	});
-
 	$(".session-obj").on("click", function () {
 		let tmp = $(this).attr("data-id");
 		let id = tmp.split("-")[1];
@@ -39,22 +25,20 @@ window.onload = function () {
 	indexFirst = 0;
 	indexLast = 0;
 	table = document.getElementById("table");
-	document.getElementById("back").onclick = function () {
-		console.log(indexFirst);
-		console.log(indexLast);
-		if (currentPage > 1) {
-			currentPage--;
-			paginate();
-		}
-	};
-	document.getElementById("next").onclick = function () {
-		console.log(indexFirst);
-		console.log(indexLast);
-		if (currentPage < pages) {
-			currentPage++;
-			paginate();
-		}
-	};
+	if ((document.getElementById("back") !== null) && (document.getElementById("next") !== null)) {
+		document.getElementById("back").onclick = function () {
+			if (currentPage > 1) {
+				currentPage--;
+				paginate();
+			}
+		};
+		document.getElementById("next").onclick = function () {
+			if (currentPage < pages) {
+				currentPage++;
+				paginate();
+			}
+		};
+	}
 	loadSessions();
 	//leere table nehmen
 	//pagination machen
@@ -71,7 +55,15 @@ function loadSessions() {
 	request.onreadystatechange = function () {
 		if (request.readyState === 4 && request.status === 200) {
 			sessions = JSON.parse(request.responseText);
-			paginate(true);
+			if (sessions.length !== 0) {
+				paginate(true);
+				// document.getElementById("next").style.display = "block";
+				// document.getElementById("back").style.display = "block";
+			}
+			else {
+				// document.getElementById("next").style.display = "none";
+				// document.getElementById("back").style.display = "none";
+			}
 		}
 	};
 }
@@ -114,7 +106,7 @@ function fillTable(sessions) {
 	for (let sessionIndex = indexFirst; sessionIndex <= indexLast; sessionIndex++) {
 		let row = table.insertRow(table.rows.length);
 		row.setAttribute("class", "session-obj");
-		row.setAttribute("data-id", "session-" + sessions[sessionIndex]._id);
+		row.setAttribute("data-id", sessions[sessionIndex]._id);
 		let cellId = row.insertCell(0);
 		let cellDate = row.insertCell(1);
 		let cellLatitude = row.insertCell(2);
@@ -122,8 +114,6 @@ function fillTable(sessions) {
 		let cellObjects = row.insertCell(4);
 		let cellMap = row.insertCell(5);
 		let cellButtons = row.insertCell(6);
-		console.log(sessions);
-		console.log(sessionIndex + "index");
 		cellDate.innerHTML = convertTime(sessions[sessionIndex].date);
 		let idA = document.createElement("a");
 		let idText = document.createTextNode(sessionIndex + 1);
@@ -150,17 +140,28 @@ function fillTable(sessions) {
 		aBearbeiten.href = "editSession/" + sessions[sessionIndex]._id;
 		aBearbeiten.innerHTML = "Bearbeiten";
 		cellButtons.appendChild(aBearbeiten);
-		//löschen Button ???
-		let form = document.createElement("form");
-		form.setAttribute("class", "delete-form");
-		let btnLöschen = document.createElement("button");
-		btnLöschen.setAttribute("type", "submit");
-		btnLöschen.setAttribute("data-id", "session-" + sessions[sessionIndex]._id);
-		btnLöschen.setAttribute("class", "btn btn-danger delete-session");
-		btnLöschen.innerHTML = "L&ouml;schen";
-		form.appendChild(btnLöschen);
-		cellButtons.appendChild(form);
+
+		let aDelete = document.createElement("button");
+		aDelete.setAttribute("class", "btn btn-danger");
+		aDelete.setAttribute("id", sessions[sessionIndex]._id);
+		aDelete.innerHTML = "L&ouml;schen";
+		cellButtons.appendChild(aDelete);
 	}
+	$(".btn-danger").on("click", function () {
+		const id = $(this).attr("id");
+		let path = "/deleteSession/" + id;
+		$.ajax({
+			type: "DELETE",
+			url: path,
+			success: function () {
+				return false;
+			},
+			error: function (err) {
+				console.error(err);
+			}
+		});
+		location.reload();
+	});
 }
 function convertTime(sessionDate) {
 	let date = new Date(sessionDate);
