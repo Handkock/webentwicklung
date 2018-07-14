@@ -161,7 +161,10 @@ function fillTable(sessions) {
 				console.error(err);
 			}
 		});
-		location.reload();
+		//timeot: workaround for firefox browser
+		setTimeout(function() {
+			location.reload();
+		}, 500);
 	});
 }
 function convertTime(sessionDate) {
